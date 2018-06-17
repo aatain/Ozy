@@ -23,12 +23,14 @@ class homePage extends Component {
   };
 
   componentDidMount() {
+    console.log('innn component did mount')
     this.callApi()
       .then(res => this.setState({ response: res.express }))
       .catch(err => console.log(err));
   }
 
   callApi = async () => {
+    console.log('hiiiiiiiiiiii')
     const response = await fetch('/api/hello');
     const body = await response.json();
 

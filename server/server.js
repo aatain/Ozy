@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000;
 //import controllers below ////******////// ////******////// ////******//////
 const eventController = require('./controller/eventController.js')
 
-app.get('/api/hey', (req, res) => {
+app.get('/api/hello', (req, res) => {
     console.log('hit the home route');
     res.send({ express: 'Hello From Express' });
 })

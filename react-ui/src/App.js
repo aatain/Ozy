@@ -1,21 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import {Redirect, BrowserRouter as Router, Route} from 'react-router-dom';
+
+import Home from './pages/Home';
+import Login from './pages/Login';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+const App = () => (
+  <Router>
+      <div className='App'>
+        <Route exact={true} path='/home' component={Home} />
+        <Route exact={true} path='/login' component={Login} />
+        <Route exact path="/" render={() => (
+            (2+4 === 4) ? (
+              <Redirect to="/home" />
+            ) : (
+              <Login />
+              )
+          )} />
       </div>
-    );
-  }
-}
+  </Router>
+)
 
 export default App;
