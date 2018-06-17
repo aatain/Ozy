@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import Header from '../components/Header.jsx';
 import Form from './login/Form.jsx';
-import FacebookButton from './login/Facebook.jsx';
+import FacebookButton from './login/FacebookButton.jsx';
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
