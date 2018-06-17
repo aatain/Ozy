@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 80px;
+}
+
+.App-header {
+  background-color: blue;
+  height: 130px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 2em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.search {
+  color:#DC4D41;
+  height: 100px;
+  padding: 1em;
+  border: 5px solid #DC4D41;
+  margin: 0 10em 0 10em;
+  font-size: large;
+}
+
+.FacebookBtn {
+  background-color: #4267b2;
+  color: white;
+  border-radius: 5px;
+  height: 40px;
+  text-align: center;
+  width: 200px;
+}
