@@ -31,4 +31,4 @@ class Search extends Component {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);git
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
