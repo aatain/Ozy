@@ -1,30 +1,35 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
+// const eventController = require('./controller/eventController.js')
+// const locationController = require('./controller/locationController.js')
 
-//import controllers below ////******////// ////******////// ////******//////
-const eventController = require('./controller/eventController.js')
-
-app.get('/api/hello', (req, res) => {
-    console.log('hit the home route');
-    res.send({ express: 'Hello From Express' });
+mongoose.connect(keys.mongoUri);
+mongoose.connection.once('open', () => {
+    console.log('Connected with MongoDB ORM - mongod-orm');
 })
 
-// app.get('/logout', (req, res) => {
-// 	console.log('hit the logout route');
-// });
+app.use(bodyParser.json());
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+
+app.get('/api/search', (req, res) => {
+    console.log('RESSSSSS', res)
+    res.send({ express: 'Hello From Express' });
+})
 
 // app.get('/newTrip', tripController.getLocation, tripController.getWeather, tripController.addTrip, (req, res) => {
 // 	res.json('yay');
 // });
 
-// app.post('/viewChecklist', (req, res) => {
-// 	console.log('hit the editSuitcase route');
-// });
-
-//listening on port 3000
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
-module.exports = app;
+app.listen(PORT, () => console.log(`Listening on port ${port}`));

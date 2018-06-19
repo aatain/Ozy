@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-import {apiBase} from 'config';
+import {apiBase} from '../config.js';
 
 const instance = axios.create({
   baseURL: apiBase,
@@ -32,6 +31,7 @@ const request = (method, url, data) => {
 
 export default {
   get: (endpoint, data) => {
+    console.log('inside get')
     return request('get', endpoint, data);
   },
   post: (endpoint, data) => {
@@ -43,3 +43,4 @@ export default {
   del: (endpoint, data) => {
     return request('delete', endpoint, data);
   },
+}

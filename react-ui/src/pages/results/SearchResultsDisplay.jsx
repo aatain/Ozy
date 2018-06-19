@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Events from "./Events.jsx";
 
-const mapStateToProps = store => {
-};
-
-const mapDispatchToProps = dispatch => { 
+const mapStateToProps = (store) => {
+  return {
+  }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+  }, dispatch)
+};
 
 class SearchResultsDisplay extends Component {
 
