@@ -1,3 +1,4 @@
+
 {
   "name": "Ozy",
   "version": "1.0.0",
@@ -10,7 +11,7 @@
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "npm run start --prefix react-ui",
-    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "cacheDirectories": [

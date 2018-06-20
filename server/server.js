@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
-const keys = require('./config/keys');
+const keys = require('../config/keys');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 
@@ -15,6 +15,12 @@ mongoose.connection.once('open', () => {
     console.log('Connected with MongoDB ORM - mongod-orm');
 })
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(bodyParser.json());
 app.use(
   cookieSession({
@@ -23,13 +29,17 @@ app.use(
   })
 );
 
-app.get('/api/search', (req, res) => {
-    console.log('RESSSSSS', res)
-    res.send({ express: 'Hello From Express' });
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../react-ui/public/index.html'));
+})
+
+app.get('/api/search?', (req, res) => {
+  console.log('inside api/search' )
+  res.send({hi: 'in the get after search'})
 })
 
 // app.get('/newTrip', tripController.getLocation, tripController.getWeather, tripController.addTrip, (req, res) => {
 // 	res.json('yay');
 // });
 
-app.listen(PORT, () => console.log(`Listening on port ${port}`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

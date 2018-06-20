@@ -36,7 +36,6 @@ const geocodeAddress = address => {
           locationName: results[0].formatted_address,
           latLngArr: [results[0].geometry.location.lat(), results[0].geometry.location.lng()]
         };
-        console.log('state', this.state)
         return locObj;
       }
       console.log('Location not found in database');
@@ -48,14 +47,13 @@ eventActions.fetchEventsByLatLng = (location) => {
   let loc = geocodeAddress(location);
   console.log('loc', loc)
   return (dispatch) => {
-    console.log('fewgeg', loc)
     dispatch({type: 'events.fetchingEventsByLatLng'});
-    console.log('after dispatch', loc)
+    console.log('after dispatch', 'Los Angeles')
 
     api
-      .get('/api/search?')
+      .get(`/api/search?${location}`)
       .then(res => {
-        console.log('res', res)
+        console.log('res from api promise', res)
         dispatch({type: 'events.fetchSuccess', res});
       })
       .catch(err => {

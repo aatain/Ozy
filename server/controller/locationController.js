@@ -1,9 +1,4 @@
-const keys = require('./config/keys');
 const locationController = {};
-
-let googleMapsClient = require('@google/maps').createClient({
-  key: keys.APIkey
-});
 
 locationController.getLatLng = (req, res, next) => {
   console.log('inside locationController')

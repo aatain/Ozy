@@ -7,6 +7,7 @@ const instance = axios.create({
 });
 
 const request = (method, url, data) => {
+  console.log('requesttttt', method, url, data)
   return new Promise((resolve, reject) => {
     (() => {
       if (method === 'get') {
@@ -20,7 +21,7 @@ const request = (method, url, data) => {
       }
     })()
     .then((res) => {
-      resolve(res.data);
+      return resolve(res.data);
     })
     .catch((err) => {
       reject(err.response);
@@ -31,7 +32,6 @@ const request = (method, url, data) => {
 
 export default {
   get: (endpoint, data) => {
-    console.log('inside get')
     return request('get', endpoint, data);
   },
   post: (endpoint, data) => {
