@@ -1,19 +1,31 @@
+const keys = require('../../config/keys');
+
 const locationController = {};
 
-locationController.getLatLng = (req, res, next) => {
-  console.log('inside locationController')
+const googleMapsClient = require('@google/maps').createClient({
+    key: 'AIzaSyCaao_a_LgrMM4LgZoJOd1NjKThOvneuKM',
+    Promise: Promise
+});
 
-  // let loc = [];
-  // geocoder.geocode("Los Angeles", function ( err, data ) {
-  //     loc = data;
-  //     console.log('i dataaaaa in getLongLat', data)
-  //     res.locals.loc;
-  //     next();
-  // });   
-};
-
-locationController.getEvents = (req, res, next) => {
-    
+locationController.getGeocodeInfo = (req, res, next) => {
+    console.log('req.body', req.body)
+    let address = Object.keys(req.query)[0] || req.body;
+    googleMapsClient.geocode({ address: address })
+        .asPromise()
+        .then((response) => {
+            if (response.json.status === 'OK') {
+                res.locals.formatted_address = response.json.results[0].formatted_address;
+                res.locals.location = response.json.results[0].geometry.location;
+                next();
+            }
+            if (response.json.status === 'ZERO_RESULTS') {
+                console.log('in else', response);
+                res.send({ error: 'ahhhhh this is an error'});
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({ error: `ahhhhh this is an error ${err}` });
+        })
 };
 
 module.exports = locationController;

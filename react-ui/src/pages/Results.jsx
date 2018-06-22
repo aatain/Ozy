@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import * as actions from '../action/actions';
+import { withRouter } from 'react-router'
 
-import Header from '../components/Header.jsx';
 import SearchResultsDisplay from './results/SearchResultsDisplay.jsx';
 
 // const mapStateToProps = (store) => {
@@ -21,7 +20,6 @@ class Results extends Component {
   render() {
     return (
       <div className='Results'>
-        <Header />
         <h1 style={{textAlign: 'center'}}>Results!</h1>
         <SearchResultsDisplay />
       </div>
@@ -29,4 +27,6 @@ class Results extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Results);
+const connectedResults = connect(null, mapDispatchToProps)(Results);
+const routedResults = withRouter(connectedResults);
+export default routedResults;

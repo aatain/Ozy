@@ -1,69 +1,64 @@
-import api from '../utils/api.js';
+import axios from "axios";
+import history from '../history'
 
 //reducer
-const eventReducer = (state={}, action) => {
+const eventReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'events.fetchingEventsByLatLng': 
-      console.log('hiiii from reducer switch')
-      return {...state, fetchingByLocation: true};
+    case 'REQUEST_EVENTS':
+      console.log('currentlyFetchingByLocation...please wait')
+      return { ...state, requestingEventsByLocation: true };
 
     case 'events.fetchSuccess':
-      return {...state, fetchingByLocation: false, ...action.res};
+      console.log('FetchingByLocation...SUCCESSFULLLLL!')
+      return { ...state, requestingEventsByLocation: false, ...action.res };
 
-    case 'events.clear':
-      return {...state, fetchingByLocation: false, collection: []};
+    case 'events.fetchError':
+      return { ...state, requestingEventsByLocation: false, ...action.error };
 
-    default: 
+    default:
       return state;
   }
 }
 
 // actions
 
-const eventActions = {};
-
-const google=window.google;
-let geocoder = new google.maps.Geocoder()
-
-const geocodeAddress = address => {
-    console.log('inside geocodeAddress')
-    let locObj; 
-
-    geocoder.geocode({ 'address': address }, function handleResults(results, status) {
-
-      if (status === google.maps.GeocoderStatus.OK) {
-        locObj = {
-          locationName: results[0].formatted_address,
-          latLngArr: [results[0].geometry.location.lat(), results[0].geometry.location.lng()]
-        };
-        return locObj;
-      }
-      console.log('Location not found in database');
-    });
+export const REQUEST_EVENTS = 'REQUEST_EVENTS';
+export const requestEvents = (location) => {
+  return { type: REQUEST_EVENTS }
 }
 
-eventActions.fetchEventsByLatLng = (location) => {
-  console.log('inside line 22', location)
-  let loc = geocodeAddress(location);
-  console.log('loc', loc)
-  return (dispatch) => {
-    dispatch({type: 'events.fetchingEventsByLatLng'});
-    console.log('after dispatch', 'Los Angeles')
+export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
+export const receiveEvents = (location, json) => {
+  return {
+    type: RECEIVE_EVENTS,
+    location,
+    posts: json.data.children.map(child => child.data),
+    receivedAt: Date.now()
+  }
+}
 
-    api
-      .get(`/api/search?${location}`)
-      .then(res => {
-        console.log('res from api promise', res)
-        dispatch({type: 'events.fetchSuccess', res});
-      })
-      .catch(err => {
-        dispatch({type: 'events.fetchError', err});
-      })
-    ;
-  };
+export const fetchEventsByLatLng = (address) => async dispatch => {
+  dispatch(requestEvents(address));
+  const res = await axios.get(`/api/search?${address}`)
+  if (res.data.data) {
+    console.log(res.data.data, 'CHECKKKK MEEEE')
+    dispatch({ type: 'events.fetchSuccess', res: res.data.data });
+    history.push('/results');
+  }
+  if (res.data.error) {
+    dispatch({ type: 'events.fetchError', error: res.error });
+  }
+}
+
+//for refresh
+export const INVALIDATE_EVENTS = 'INVALIDATE_EVENTS'
+export function invalidateEvents(location) {
+  return {
+    type: INVALIDATE_EVENTS,
+    location
+  }
 }
 
 export {
-    eventReducer,
-    eventActions
+  eventReducer
 }; 

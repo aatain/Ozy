@@ -6,6 +6,8 @@ import Events from "./Events.jsx";
 
 const mapStateToProps = (store) => {
   return {
+    events: store.eventReducer.events,
+    location: store.eventReducer.location
   }
 }
 
@@ -17,16 +19,16 @@ const mapDispatchToProps = (dispatch) => {
 class SearchResultsDisplay extends Component {
 
   render() {
-    let events = [];
-    for(let i = 0; i < 5; i++){
-      events.push(<Events key={i} eventItem={'g'}/>);
+    let eventArr = [];
+    for (let i = 0; i < this.props.events.length; i++) {
+      eventArr.push(<Events key={i} event={this.props.events[i]} />);
     }
-    
-    return(
-    <div className="displayBox">
-      <h4>Events in This Area</h4>
-      {events}
-    </div>
+
+    return (
+      <div className="displayBox">
+        <h4 style={{ textAlign: 'center' }}>Events in This {}}</h4>
+        {eventArr}
+      </div>
     );
   }
 }
