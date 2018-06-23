@@ -4,7 +4,6 @@ const axios = require('axios');
 const keys = require('../../config/keys');
 
 eventController.getEventsFromEventBrite = (req, res, next) => {
-    let address = res.locals.location.formatted_address;
     let lat = "" + res.locals.location.lat;
     let lng = "" + res.locals.location.lng;
     let dis = res.locals.location.dis || 25; 
@@ -13,6 +12,8 @@ eventController.getEventsFromEventBrite = (req, res, next) => {
       })
     .then( response => {
         res.locals.events = response.data
+        res.locals.events.formatted_address = res.locals.formatted_address;
+
         next();
       })
       .catch(function (error) {

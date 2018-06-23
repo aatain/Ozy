@@ -16,30 +16,43 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.fetchEventsByLatLng(this.state.value)
-  }
+  // componentDidMount(){
+  // }
 
   render() {
+    let locationInput = '';
     return (
-        <form className="container form-group row" onSubmit={this.handleSubmit}>
-        <label className='col-form-label col-sm-2'>Enter a location:
-          <input type="text" className='form-control' placeholder="" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input className='col-sm-2' type="submit" value="Submit" />
-        </form>
+      <div>
+        {/* <form className="form-inline">
+          <div className="row">
+            <div className="col-xs-8 col-sm-10">
+
+              <div className="form-group">
+                <label className="sr-only" htmlFor="address">Address</label>
+                <input type="text"
+                  className="form-control input-lg"
+                  id="address"
+                  placeholder="London"
+                  required />
+              </div>
+
+            </div>
+            <div className="col-xs-4 col-sm-2">
+
+              <button type="submit" className="btn btn-default btn-lg">
+                <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+
+            </div>
+          </div>
+        </form> */}
+        <div className="container">
+          <span>Enter a location</span>
+          <br /><br /><input type="text" placeholder="Enter a location..." onChange={(e) => locationInput = e.target.value} />
+          <button onClick={() => { this.props.fetchEventsByLatLng(locationInput) }}>Submit</button>
+        </div>
+      </div>
     );
   }
 };

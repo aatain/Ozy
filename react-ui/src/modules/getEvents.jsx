@@ -10,7 +10,7 @@ const eventReducer = (state = {}, action) => {
 
     case 'events.fetchSuccess':
       console.log('FetchingByLocation...SUCCESSFULLLLL!')
-      return { ...state, requestingEventsByLocation: false, ...action.res };
+      return { ...state, requestingEventsByLocation: false, ...action.res.data };
 
     case 'events.fetchError':
       return { ...state, requestingEventsByLocation: false, ...action.error };
@@ -41,8 +41,8 @@ export const fetchEventsByLatLng = (address) => async dispatch => {
   dispatch(requestEvents(address));
   const res = await axios.get(`/api/search?${address}`)
   if (res.data.data) {
-    console.log(res.data.data, 'CHECKKKK MEEEE')
-    dispatch({ type: 'events.fetchSuccess', res: res.data.data });
+    console.log(res.data, 'CHECKKKK MEEEE')
+    dispatch({ type: 'events.fetchSuccess', res: res.data});
     history.push('/results');
   }
   if (res.data.error) {

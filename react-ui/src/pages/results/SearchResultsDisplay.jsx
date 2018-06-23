@@ -7,7 +7,7 @@ import Events from "./Events.jsx";
 const mapStateToProps = (store) => {
   return {
     events: store.eventReducer.events,
-    location: store.eventReducer.location
+    address: store.eventReducer.formatted_address
   }
 }
 
@@ -26,7 +26,7 @@ class SearchResultsDisplay extends Component {
 
     return (
       <div className="displayBox">
-        <h4 style={{ textAlign: 'center' }}>Events in This {}}</h4>
+        <h4 style={{ textAlign: 'center' }}>Events in {this.props.address}</h4>
         <div className='row-events row mt-5'>
         {eventArr}
         </div>
