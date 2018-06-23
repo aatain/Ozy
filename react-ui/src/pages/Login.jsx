@@ -15,7 +15,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='Login'>
+      <div className='Login container-fluid'>
         <br /><Form submitLoginInfo={console.log('form in login')}/>
         <br /><FacebookButton />
       </div>

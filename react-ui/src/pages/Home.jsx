@@ -18,7 +18,7 @@ class homePage extends Component {
 
   render() {
     return (
-      <div>
+      <div className='container-fluid'>
         <h1 style={{textAlign: 'center'}}>Welcome!</h1>
         <Search />
       </div>

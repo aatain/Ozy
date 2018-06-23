@@ -19,7 +19,7 @@ class Results extends Component {
 
   render() {
     return (
-      <div className='Results'>
+      <div className='Results container-fluid'>
         <h1 style={{textAlign: 'center'}}>Results!</h1>
         <SearchResultsDisplay />
       </div>

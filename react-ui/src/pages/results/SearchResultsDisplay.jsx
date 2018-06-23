@@ -27,7 +27,9 @@ class SearchResultsDisplay extends Component {
     return (
       <div className="displayBox">
         <h4 style={{ textAlign: 'center' }}>Events in This {}}</h4>
+        <div className='row-events row mt-5'>
         {eventArr}
+        </div>
       </div>
     );
   }
