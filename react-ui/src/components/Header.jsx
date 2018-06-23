@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import tourist from '../tourist.svg';
+import tourist from '../assets/tourist.svg';
 
 class Header extends Component {
   render() {

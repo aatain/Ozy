@@ -2,7 +2,9 @@ import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import history from './history.js'
 
-import Header from './components/Header.jsx'
+import Header from './components/Header.jsx';
+import NavBar from './components/NavBar.jsx'
+
 import NotFound from './components/NotFound.jsx'
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -11,7 +13,7 @@ import './App.css';
 
 const App = () => (
   <div className='App'>
-    <Header />
+    <NavBar />
     <Router history={history} >
       <Switch>
         <Route exact path='/home' component={Home} />

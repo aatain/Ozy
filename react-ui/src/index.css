@@ -1,5 +1,26 @@
 body {
   margin: 0;
   padding: 0;
+  font-size: 1rem;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+@include media-breakpoint-up(sm) {
+  body {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  body {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  body {
+    font-size: 1.6rem;
+  }
+}
+
+
