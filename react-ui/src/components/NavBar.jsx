@@ -4,27 +4,24 @@ import tourist from '../assets/tourist.svg';
 class NavBar extends Component {
     render() {
         return (
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">
-                    <img src={tourist} width="50 "height="50" class="d-inline-block align-top" alt="" />
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <a className="navbar-brand" href="#">
+                    <img src={tourist} width="50 "height="50" className="d-inline-block align-top" alt="" />
                     <span className='px-2 display-4'>     Ozy</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item active">
+                            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/signin">Sign In</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Help</a>
                         </li>
                     </ul>
                 </div>
@@ -35,6 +32,3 @@ class NavBar extends Component {
 }
 
 export default NavBar;
-
-
-{/* 520 N Prospect Ave 206 Redondo Beach  */ }
