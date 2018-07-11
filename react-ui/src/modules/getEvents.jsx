@@ -8,11 +8,11 @@ const eventReducer = (state = {}, action) => {
       console.log('currentlyFetchingByLocation...please wait')
       return { ...state, requestingEventsByLocation: true };
 
-    case 'events.fetchSuccess':
+    case 'FETCH_EVENTS_SUCCESS':
       console.log('FetchingByLocation...SUCCESSFULLLLL!')
       return { ...state, requestingEventsByLocation: false, ...action.res.data };
 
-    case 'events.fetchError':
+    case 'FETCH_EVENTS_ERROR':
       return { ...state, requestingEventsByLocation: false, ...action.error };
 
     default:
@@ -21,7 +21,6 @@ const eventReducer = (state = {}, action) => {
 }
 
 // actions
-
 export const REQUEST_EVENTS = 'REQUEST_EVENTS';
 export const requestEvents = (location) => {
   return { type: REQUEST_EVENTS }
@@ -36,17 +35,17 @@ export const receiveEvents = (location, json) => {
     receivedAt: Date.now()
   }
 }
-
+export const FETCH_EVENTS_SUCCESS = 'FETCH_EVENTS_SUCCESS';
+export const FETCH_EVENTS_ERROR = 'FETCH_EVENTS_ERROR';
 export const fetchEventsByLatLng = (address) => async dispatch => {
   dispatch(requestEvents(address));
   const res = await axios.get(`/api/search?${address}`)
   if (res.data.data) {
-    console.log(res.data, 'CHECKKKK MEEEE')
-    dispatch({ type: 'events.fetchSuccess', res: res.data});
+    dispatch({ type: FETCH_EVENTS_SUCCESS, res: res.data});
     history.push('/results');
   }
   if (res.data.error) {
-    dispatch({ type: 'events.fetchError', error: res.error });
+    dispatch({ type: FETCH_EVENTS_ERROR, error: res.error });
   }
 }
 

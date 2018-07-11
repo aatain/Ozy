@@ -7,21 +7,21 @@ import NavBar from './components/NavBar.jsx'
 
 import NotFound from './components/NotFound.jsx'
 import Home from './pages/Home';
-import SignIn from './pages/SignIn';
+import Login from './pages/Login';
 import Results from './pages/Results';
 import './App.css';
 
 const App = () => (
-  <div className='App'>
+  <div className='app-routes'>
     <NavBar />
     <Router history={history} >
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route exact path='/signin' component={SignIn} />
+        <Route exact path='/login' component={Login} />
         <Route exact path='/results' component={Results} />
         <Route exact component={NotFound} />
         {/* <Route exact path="/" render={() => (
-          (2 + 4 === 4) ? (
+          loggedIn ? (
             <Redirect to="/home" />
           ) : (
               <Login />
